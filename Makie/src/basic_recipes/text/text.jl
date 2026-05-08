@@ -1,4 +1,4 @@
-# these are the plot types that makie handles by default
+# these are all the plot types that makie can handle
 const TEXT_PLOT_TYPES = [PlainTextPlot, LaTeXTextPlot, RichTextPlot, DynamicTextPlot]
 
 function plot!(text::Text)
@@ -18,16 +18,19 @@ function plot!(text::Text)
 
     @assert length(attr.converted[][1]) == length(attr.input_text[]) "there should be given as many positions as texts."
 
-    # unwrap text and resolve layouters
-    map!(attr, [:input_text, :string_layouter], [:unwrapped_text, :resolved_layouters]) do strings, layouters
+    # unwrap text and resolve layouters, figure out in what plot the text will go
+    map!(attr, [:input_text, :string_layouter], [:unwrapped_text, :resolved_layouters, :text_plot_types]) do strings, layouters
         unwrapped_strings = unwrap_string.(strings)
         resolved_layouters = map(enumerate(strings)) do (i, s)
             given_layouter = sv_getindex(layouters, i)
             resolve_string_layouter(s, given_layouter)
         end
+        text_plot_type = get_text_plot_type.(unwrapped_strings, resolved_layouters)
+
         # type inference can lead to this being Vector{String} or similar. Changing string type will then break.
-        (Ref{Any}(unwrapped_strings), Ref{Any}(resolved_layouters))
+        (Ref{Any}(unwrapped_strings), Ref{Any}(resolved_layouters), Ref{Any}(text_plot_type))
     end
+
 
     # TODO: figure out per character font when there are multiple strings?
     map!(attr, [:unwrapped_text, :fonts, :font], :selected_font) do strings, fonts, font

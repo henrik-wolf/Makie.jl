@@ -53,6 +53,14 @@ are every output of the text attributes, and are thus not
 """
 function layouted_string_plotspecs end
 
+"""
+    get_text_plot_type(text, layouter)
+
+gets the plot type that will be used by the given combination of (unwrapped) `text` and resolved `layouter`.
+The plot will receive the combination of text and layouter as well as all attributes that apply to it.
+"""
+function get_text_plot_type(text, layouter) end
+
 # TODO: Is this the same as to_float_justification?
 function justification2float(justification, halign)
     if justification === automatic
