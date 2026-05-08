@@ -1,6 +1,3 @@
-# these are the plot types that makie handles by default
-const TEXT_PLOT_TYPES = [PlainTextPlot, LaTeXTextPlot, RichTextPlot, DynamicTextPlot]
-
 function plot!(text::Text)
     # text.attributes now contains the attributes from the recipe, including generic and colormap
     # as well as arg1,arg2... and position, which is a legacy attribute that we should probably get rid of
