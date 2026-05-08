@@ -18,6 +18,8 @@ function layouted_string_plotspecs(inputs, ::DefaultStringLayouter, id)
                     :computed_color,
                     :strokecolor,
                     :strokewidth,
+                    :glowcolor,
+                    :glowwidth,
                 ]
         )...,
     )
@@ -40,8 +42,10 @@ function to_glyphinfos(
         color,
         strokecolor,
         strokewidth,
+        glowcolor,
+        glowwidth,
     )
-    isempty(string) && return []
+    isempty(string) && return GlyphInfo[]
 
     halign, valign = align
 
@@ -131,10 +135,12 @@ function to_glyphinfos(
     colors = per_character(color, charinfos)
     strokecolors = per_character(strokecolor, charinfos)
     strokewidths = per_character(strokewidth, charinfos)
+    glowcolors = per_character(glowcolor, charinfos)
+    glowwidths = per_character(glowwidth, charinfos)
 
     return map(
-        charinfos, charorigins, scales, rotations, colors, strokecolors, strokewidths
-    ) do charinfo, charorigin, scale, rotation, color, strokecolor, strokewidth
+        charinfos, charorigins, scales, rotations, colors, strokecolors, strokewidths,glowcolors, glowwidths
+    ) do charinfo, charorigin, scale, rotation, color, strokecolor, strokewidth, glowcolor, glowwidth
         GlyphInfo(
             glyph_index(charinfo.font, charinfo.char),
             charinfo.font,
@@ -145,6 +151,8 @@ function to_glyphinfos(
             color,
             strokecolor,
             strokewidth,
+            glowcolor,
+            glowwidth
         )
     end
 end

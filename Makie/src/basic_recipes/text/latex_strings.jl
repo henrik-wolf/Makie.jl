@@ -16,6 +16,8 @@ function layouted_string_plotspecs(inputs, ::LaTeXStringLayouter, id)
                     :color,
                     :strokecolor,
                     :strokewidth,
+                    :glowcolor,
+                    :glowwidth,
                     :word_wrap_width,
                 ]
         )...,
@@ -49,7 +51,7 @@ function layouted_string_plotspecs(inputs, ::LaTeXStringLayouter, id)
 end
 
 function glyphinfos_and_lines(
-        string, font, fontsize, align, rotation, color, strokecolor, strokewidth, word_wrap_width
+        string, font, fontsize, align, rotation, color, strokecolor, strokewidth, glowcolor, glowwidth, word_wrap_width
     )
     old_texfont = get_texfont_family()
     set_texfont_family!(font)
@@ -121,7 +123,7 @@ function glyphinfos_and_lines(
 
     glyph_infos =
         map(glyphindices, fonts, positions, extents, scales_2d) do glyphindex, font, position, extent, scale
-        GlyphInfo(glyphindex, font, position, extent, scale, rotation, color, strokecolor, strokewidth)
+        GlyphInfo(glyphindex, font, position, extent, scale, rotation, color, strokecolor, strokewidth, glowcolor, glowwidth)
     end
     set_texfont_family!(old_texfont)
 
@@ -141,7 +143,6 @@ function glyphinfos_and_lines(
         push!(linewidths, fontsize * h.thickness, fontsize * h.thickness)
         push!(linecolors, color, color)
     end
-
     return glyph_infos, (; linesegments, linewidths, linecolors)
 end
 

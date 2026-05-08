@@ -8,6 +8,8 @@ struct GlyphInfo
     color::RGBAf
     strokecolor::RGBAf
     strokewidth::Float32
+    glowcolor::RGBAf
+    glowwidth::Float32
 end
 
 # Copy constructor, to overwrite a field
@@ -22,8 +24,10 @@ function GlyphInfo(
         color = gi.color,
         strokecolor = gi.strokecolor,
         strokewidth = gi.strokewidth,
+        glowcolor = gi.glowcolor,
+        glowwidth = gi.glowwidth,
     )
-    return GlyphInfo(glyph, font, origin, extent, size, rotation, color, strokecolor, strokewidth)
+    return GlyphInfo(glyph, font, origin, extent, size, rotation, color, strokecolor, strokewidth, glowcolor, glowwidth)
 end
 
 function calculated_attributes!(::Type{Glyphs}, plot::Plot)

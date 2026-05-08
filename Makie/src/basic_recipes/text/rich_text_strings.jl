@@ -183,6 +183,8 @@ function process_rich_text_node!(lines, glyph_state::GlyphState, text::String, _
                     glyph_state.color,
                     RGBAf(0, 0, 0, 0),
                     0.0f0,
+                    RGBAf(0, 0, 0, 0),
+                    0.0f0,
                 ),
             )
             x = x + glyph_extent.hadvance * glyph_state.size[1]
