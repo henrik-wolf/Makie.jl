@@ -139,7 +139,7 @@ function to_glyphinfos(
     glowwidths = per_character(glowwidth, charinfos)
 
     return map(
-        charinfos, charorigins, scales, rotations, colors, strokecolors, strokewidths,glowcolors, glowwidths
+        charinfos, charorigins, scales, rotations, colors, strokecolors, strokewidths, glowcolors, glowwidths
     ) do charinfo, charorigin, scale, rotation, color, strokecolor, strokewidth, glowcolor, glowwidth
         GlyphInfo(
             glyph_index(charinfo.font, charinfo.char),
@@ -152,7 +152,7 @@ function to_glyphinfos(
             strokecolor,
             strokewidth,
             glowcolor,
-            glowwidth
+            glowwidth,
         )
     end
 end

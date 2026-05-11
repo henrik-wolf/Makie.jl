@@ -17,6 +17,8 @@ function text_bb(str, font, size)
         RGBAf(0.0, 0.0, 0.0, 1.0),
         RGBAf(0.0, 0.0, 0.0, 1.0),
         0.0,
+        RGBAf(0.0, 0.0, 0.0, 1.0),
+        0.0,
     )
     return unchecked_boundingbox(
         [i.glyph for i in glyphinfos], [i.origin for i in glyphinfos], size, [i.extent for i in glyphinfos], rot
